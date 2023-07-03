@@ -13,13 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +2 AppData/Local/nvim/init.lua
-badd +4 AppData/Local/nvim/lua/config/lazy.lua
-badd +0 ~/AppData/Local/nvim/
+badd +6 AppData/Local/nvim/lua/config/lazy.lua
+badd +1 ~/AppData/Local/nvim/lazy-lock.json
 argglobal
 %argdel
-$argadd ~/AppData/Local/nvim/
-edit AppData/Local/nvim/lua/config/lazy.lua
+edit ~/AppData/Local/nvim/lazy-lock.json
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -28,11 +26,12 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-let s:l = 4 - ((3 * winheight(0) + 21) / 43)
+balt AppData/Local/nvim/lua/config/lazy.lua
+let s:l = 1 - ((0 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 4
+keepjumps 1
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
